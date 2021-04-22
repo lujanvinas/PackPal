@@ -15,19 +15,23 @@ import {
 const ItemState = props => {
     const initialState = {
         items: [
-            {
+            {   
+                "id": 1,
                 "object": "passport",
                 "quantity": "2"
             },
-            {
+            {   
+                "id": 2,
                 "object": "cell-phone charger",
                 "quantity": "1"
             },
             {
+                "id": 3,
                 "object": "laptop",
                 "quantity": "1"
             }
-        ]
+        ],
+        current: null
     };
 
     const [state, dispatch] = useReducer(itemReducer, initialState);
@@ -42,14 +46,22 @@ const ItemState = props => {
     // Delete Item
     const deleteItem= id => {
         dispatch({ type: DELETE_ITEM, payload: id })
-
     }
 
     // Set Current Item
+    const setCurrent= item => {
+        dispatch ({ type: SET_CURRENT, payload: item })
+    }
 
     // Clear Current Item
+    const clearCurrent= () => {
+        dispatch ({ type: CLEAR_CURRENT})
+    };
 
     // Update Item
+    const updateItem= item => {
+        dispatch ({ type: UPDATE_ITEM, payload: item })
+    }
 
     // Filter Items
 
@@ -60,8 +72,13 @@ const ItemState = props => {
         <ItemContext.Provider
             value={{
                 items: state.items,
+                current: state.current,
                 addItem,
-                deleteItem
+                deleteItem,
+                setCurrent,
+                clearCurrent,
+                updateItem
+
             }}>
             { props.children }
         </ItemContext.Provider>

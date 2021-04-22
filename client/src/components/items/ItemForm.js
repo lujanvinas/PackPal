@@ -1,10 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ItemContext from '../../context/item/itemContext';
 import ItemItem from './ItemItem';
 
 const ItemForm = () => {
     const itemContext = useContext(ItemContext);
 
+    const { addItem, updateItem, clearCurrent, current } = itemContext;
+
+    useEffect(()=> {
+        if(current !== null) {
+            setItem(current);
+        } else {
+            setItem({
+            object: '',
+            quantity: '1'
+        })
+        }
+    }, [itemContext, current])
 
     const [item, setItem] = useState({
         object: '',
@@ -17,22 +29,30 @@ const ItemForm = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        itemContext.addItem(item);
-        setItem({
-            object: '',
-            quantity: '1' 
-        })
+        if(current === null) {
+            addItem(item);
+        } else {
+            updateItem(item);
+        }
+        clearAll();
+    }
+
+    const clearAll = () => {
+        clearCurrent();
     }
 
     return (
-        <form onSubmit ={onSubmit}>
-            <h2 className="text-primary">Add Item</h2>
+        
+        <form className= {current ? 'current items-form form-container' : 'items-form form-container'}onSubmit ={onSubmit}>
+            {/* <h2 className="text-primary">Add Item</h2> */}
             <input type="text" placeholder="Item" name="object" value={object} onChange={onChange}/>
-            <h5>Quantity</h5>
-            <input type="number" name="quantity" value={quantity} onChange={onChange}/>
+            <input type="number" name="quantity" min="1" value={quantity} onChange={onChange}/>
             <div>
-                <input type="submit" value="Add Item" className="btn btn-primary btn-block"/>
+                <input type="submit" value={current ? 'Update' : 'Add'} className={current ? 'btn btn-light' : "btn btn-dark btn-sm"}/>
             </div>
+            {current && <button className="btn-dark btn-close" onClick={clearAll}>X</button>
+            
+            }
         </form>
     )
 }
