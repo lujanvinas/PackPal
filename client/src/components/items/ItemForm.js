@@ -13,7 +13,7 @@ const ItemForm = () => {
         } else {
             setItem({
             object: '',
-            quantity: '1'
+            quantity: ''
         })
         }
     }, [itemContext, current])
@@ -44,9 +44,8 @@ const ItemForm = () => {
     return (
         
         <form className= {current ? 'current items-form form-container' : 'items-form form-container'}onSubmit ={onSubmit}>
-            {/* <h2 className="text-primary">Add Item</h2> */}
             <input type="text" placeholder="Item" name="object" value={object} onChange={onChange}/>
-            <input type="number" name="quantity" min="1" value={quantity} onChange={onChange}/>
+            <input type="number" name="quantity" min="1" placeholder="qty." value={quantity} onChange={onChange}/>
             <div>
                 <input type="submit" value={current ? 'Update' : 'Add'} className={current ? 'btn btn-light' : "btn btn-dark btn-sm"}/>
             </div>

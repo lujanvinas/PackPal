@@ -31,7 +31,8 @@ const ItemState = props => {
                 "quantity": "1"
             }
         ],
-        current: null
+        current: null,
+        filtered: null
     };
 
     const [state, dispatch] = useReducer(itemReducer, initialState);
@@ -64,8 +65,14 @@ const ItemState = props => {
     }
 
     // Filter Items
-
+    const filterItems = text => {
+        dispatch({ type: FILTER_ITEMS, payload: text })
+    }
+ 
     // Clear Filter
+    const clearFilter= () => {
+        dispatch ({ type: CLEAR_FILTER})
+    };
 
 
     return (
@@ -73,11 +80,14 @@ const ItemState = props => {
             value={{
                 items: state.items,
                 current: state.current,
+                filtered: state.filtered,
                 addItem,
                 deleteItem,
                 setCurrent,
                 clearCurrent,
-                updateItem
+                updateItem,
+                filterItems,
+                clearFilter
 
             }}>
             { props.children }

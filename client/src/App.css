@@ -2,7 +2,7 @@
 
 /* Global Styles */
 :root {
-  --primary-color: salmon;
+  --primary-color: lightseagreen;
   --dark-color: black;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -335,9 +335,9 @@ textarea {
   width: 100%;
   padding: .7rem;
   font-size: 1.2rem;
-  border: 0;
+  border: none;
   border-radius: 10px;
-  background-color: salmon;
+  background-color: white;
 
 }
 
@@ -348,6 +348,10 @@ button {
 
 input::placeholder {
   color: grey;
+}
+
+input.filter {
+  border: 1px solid;
 }
 
 .form-group {
@@ -389,6 +393,7 @@ input::placeholder {
 h2,
 h3 {
   text-align: center;
+  display: block;
 }
 
 table th,

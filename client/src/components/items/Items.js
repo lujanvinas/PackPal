@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ItemItem from './ItemItem';
 import ItemContext from '../../context/item/itemContext';
 
@@ -6,14 +7,25 @@ import ItemContext from '../../context/item/itemContext';
 const Items = () => {
     const itemContext = useContext(ItemContext);
     
-    const { items } = itemContext;
+    const { items, filtered } = itemContext;
+
+    if(items.length === 0) {
+        return <h4>Please add an item</h4>
+    }
 
     return (
         <Fragment>
-            {items.map(item => 
-            (<ItemItem key= {item.id} item={item} />)
-            )}
-            
+            <TransitionGroup>
+                {filtered !== null ? filtered.map(item => (
+                <CSSTransition key= {item.id} timeout={500} classNames="item">
+                    <ItemItem item={item} />
+                </CSSTransition>)) 
+                : items.map(item => (
+                <CSSTransition key= {item.id} timeout={500} classNames="item">
+                    <ItemItem item={item} />
+                </CSSTransition>)
+                )}
+            </TransitionGroup>   
         </Fragment>
     )
 }

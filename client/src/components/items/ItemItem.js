@@ -1,4 +1,4 @@
-import React, { useContext }from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ItemContext from '../../context/item/itemContext';
 
@@ -24,7 +24,7 @@ const ItemItem = ({ item }) => {
             </p>
             
         </div>
-    )
+    ) 
 }
 
 ItemItem.propTypes = {

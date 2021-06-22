@@ -1,6 +1,7 @@
 import React from 'react';
 import Items from '../items/Items';
 import ItemForm from '../items/ItemForm';
+import ItemFilter from '../items/ItemFilter';
 
 const Home = () => {
     return (
@@ -9,6 +10,7 @@ const Home = () => {
                 <ItemForm />
             </div>
             <div>
+                <ItemFilter />
                 <Items />
             </div>
         </div>
